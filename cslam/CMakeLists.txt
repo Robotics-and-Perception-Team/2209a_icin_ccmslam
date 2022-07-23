@@ -80,7 +80,6 @@ find_package(Eigen3 REQUIRED 3.0)
 find_package(PkgConfig)
 pkg_check_modules(SERIAL libserial)
 
-
 include_directories(${EIGEN_INCLUDE_DIRS})
 add_definitions(${EIGEN_DEFINITIONS})
 find_package(PCL 1.3 REQUIRED)
@@ -90,7 +89,6 @@ if(${ROS_VERSION_INDIGO})
     set(OpenCV_INCLUDE_DIRS ${PROJECT_SOURCE_DIR}/thirdparty/opencv-2.4.13/build/include)
     find_package(OpenCV 2.4.13 REQUIRED)
 endif()
-
 
 set(THIRDPARTY_LIBS
   ${PROJECT_SOURCE_DIR}/thirdparty/g2o/lib/libg2o.so
@@ -119,7 +117,6 @@ set(EXTERNAL_LIBRARIES
   ${PCL_LIBRARIES}
   ${EIGEN3_LIBS}
 )
-
 
 ADD_SUBDIRECTORY( include/cslam )
 
@@ -207,3 +204,4 @@ add_executable(ccmslamServerNode
 add_dependencies(ccmslamServerNode ccmslam_lib)
 target_include_directories(ccmslamServerNode PRIVATE ${SERIAL_INCLUDE_DIRS})
 target_link_libraries(ccmslamServerNode ${EXTERNAL_LIBRARIES}  ${SERIAL_LDFLAGS} ccmslam_lib)
+

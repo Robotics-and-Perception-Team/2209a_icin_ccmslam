@@ -34,6 +34,8 @@ LocalMapping::LocalMapping(ccptr pCC, mapptr pMap, dbptr pDB, viewptr pViewer = 
       mClientId(pCC->mClientId),
       mpViewer(pViewer)
 {
+    // my_serial_stream.Open( "/dev/ttyUSB0" ) ;
+
     mAddedKfs = 0;
     mCulledKfs = 0;
 
@@ -197,6 +199,8 @@ void LocalMapping::RunServer()
 
         usleep(params::timings::server::miMappingRate);
     }
+    // my_serial_stream.Close();
+
 }
 
 void LocalMapping::InsertKeyFrame(kfptr pKF)
@@ -207,9 +211,13 @@ void LocalMapping::InsertKeyFrame(kfptr pKF)
 
 bool LocalMapping::CheckRSSISignal()
 {
-    my_serial_stream.Open( "/dev/ttyUSB1" ) ;
-    
+    int data_read;
+    my_serial_stream.Open( "/dev/ttyUSB0" ) ;
+
+    my_serial_stream >> data_read;
+    cout << data_read << std::endl;
     my_serial_stream.Close();
+
     return true;
 }
 
